@@ -1,0 +1,36 @@
+nikita㉿kali)-[~]
+└─$ echo -e "Hello\nNikita" > abc.txt
+
+                                                                                
+┌──(nikita㉿kali)-[~]
+└─$ zip --password secret123 word.zip abc.txt
+
+updating: abc.txt (stored 0%)
+                                                                                
+┌──(nikita㉿kali)-[~]
+└─$ zip2john word.zip > ziphash.txt
+
+ver 1.0 efh 5455 efh 7875 word.zip/abc.txt PKZIP Encr: 2b chk, TS_chk, cmplen=25, decmplen=13, crc=87CC70F7 ts=6944 cs=6944 type=0
+                                                                                
+┌──(nikita㉿kali)-[~]
+└─$ john ziphash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+secret123        (word.zip/abc.txt)     
+1g 0:00:00:00 DONE (2025-04-17 13:10) 16.66g/s 341333p/s 341333c/s 341333C/s christal..michelle4
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+                                                                                
+┌──(nikita㉿kali)-[~]
+└─$ john --show ziphash.txt
+
+word.zip/abc.txt:secret123:abc.txt:word.zip::word.zip
+
+1 password hash cracked, 0 left
+                                                                                
+┌──(nikita㉿kali)-[~]
+└─$ 
+

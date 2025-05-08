@@ -1,0 +1,113 @@
+Microsoft Windows [Version 10.0.26100.3476]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\nikit>D:\xampp\apache
+'D:\xampp\apache' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\nikit>d:
+
+D:\>cd xampp
+
+D:\xampp>cd apache
+
+D:\xampp\apache>openssl genrsa -out server.key 2048
+'openssl' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\xampp\apache>cd D:\xampp\apache\bin
+
+D:\xampp\apache\bin>openssl genrsa -out server.key 2048
+
+D:\xampp\apache\bin>openssl req -new -key server.key -out server.csr
+Can't open "C:\Apache24\conf/openssl.cnf" for reading, No such file or directory
+9C0D0000:error:80000003:system library:BIO_new_file:No such process:crypto\bio\bss_file.c:67:calling fopen(C:\Apache24\conf/openssl.cnf, r)
+9C0D0000:error:10000080:BIO routines:BIO_new_file:no such file:crypto\bio\bss_file.c:75:
+
+D:\xampp\apache\bin>D:\xampp\apache\conf
+'D:\xampp\apache\conf' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\xampp\apache\bin>
+
+D:\xampp\apache\bin>cd D:\xampp\apache\conf
+
+D:\xampp\apache\conf>dir openssl.cnf
+ Volume in drive D is New Volume
+ Volume Serial Number is 86A3-2F2E
+
+ Directory of D:\xampp\apache\conf
+
+19-09-2023  20:31            12,714 openssl.cnf
+               1 File(s)         12,714 bytes
+               0 Dir(s)  168,173,441,024 bytes free
+
+D:\xampp\apache\conf>cd D:\xampp\apache\bin
+
+D:\xampp\apache\bin>set OPENSSL_CONF=D:\xampp\apache\conf\openssl.cnf
+
+D:\xampp\apache\bin>openssl req -new -key server.key -out server.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:IN
+State or Province Name (full name) [Some-State]:Maharashtra
+Locality Name (eg, city) []:Pune
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Sanjivani COE
+Organizational Unit Name (eg, section) []:IT Department
+Common Name (e.g. server FQDN or YOUR name) []:localhost
+Email Address []:nikitabhor2004@gmail.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:n!k!t@_0303_
+An optional company name []:Sanjivani
+
+D:\xampp\apache\bin>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+Certificate request self-signature ok
+subject=C = IN, ST = Maharashtra, L = Pune, O = Sanjivani COE, OU = IT Department, CN = localhost, emailAddress = nikitabhor2004@gmail.com
+
+D:\xampp\apache\bin>curl -vk https://localhost
+*   Trying [::1]:443...
+* Connected to localhost (::1) port 443
+* ALPN: curl offers h2,http/1.1
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=localhost
+*  start date: Nov 10 23:48:47 2009 GMT
+*  expire date: Nov  8 23:48:47 2019 GMT
+*  issuer: CN=localhost
+*  SSL certificate verify result: self-signed certificate (18), continuing anyway.
+* using HTTP/1.1
+> GET / HTTP/1.1
+> Host: localhost
+> User-Agent: curl/8.4.0
+> Accept: */*
+>
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* old SSL session ID is stale, removing
+< HTTP/1.1 302 Found
+< Date: Thu, 10 Apr 2025 08:10:07 GMT
+< Server: Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.0.30
+< X-Powered-By: PHP/8.0.30
+< Location: https://localhost/dashboard/
+< Content-Length: 0
+< Content-Type: text/html; charset=UTF-8
+<
+* Connection #0 to host localhost left intact
+
+D:\xampp\apache\bin>
